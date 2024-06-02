@@ -7,12 +7,7 @@ import { Component } from "@angular/core";
     styleUrl: './button-one.component.css'
 })
 // ButtonOne for handling start and pause timer
-export class ButtonOne {
+export class ButtonOneComponent {
     buttonText = 'Start';
-
-    handleClick() {
-        console.log('Button clicked!');
-        // Your logic for handling the button click goes here
-    }
 }
   

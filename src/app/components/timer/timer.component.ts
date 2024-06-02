@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
+import { Timer } from "../../classes/timer";
 
 @Component({
     selector: 'timer',
@@ -6,25 +7,29 @@ import { Component } from "@angular/core";
     templateUrl: './timer.component.html',
     styleUrl: './timer.component.css'
 })
-export class Timer {
+export class TimerComponent {
+    currentTimerValue:Timer = new Timer(0,0,0);
+    @Output() currentTimerValueEmitter = new EventEmitter<Timer>();
+
+    getCurrentTimerValue(){
+      this.currentTimerValueEmitter.emit(this.currentTimerValue);
+    }
 
     onTypedHour(event: any) {
         event.target.value = this.truncateInputValue(event.target.value);
-        console.log("hour: ", event.target.value);
+        this.currentTimerValue.hours = event.target.value
     }
 
     onTypedMinute(event: any) {
         event.target.value = this.validateInputValue(event.target.value);
         event.target.value = this.truncateInputValue(event.target.value);
-
-        console.log("minute:", event.target.value);
+        this.currentTimerValue.minutes = event.target.value
     }
 
     onTypedSecond(event: any) {
         event.target.value = this.validateInputValue(event.target.value);
         event.target.value = this.truncateInputValue(event.target.value);
-
-        console.log("second:", event.target.value);
+        this.currentTimerValue.seconds = event.target.value
     }
 
     private truncateInputValue(inputValue: any): string {

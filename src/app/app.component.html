@@ -8,12 +8,13 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <main class="main">
-  <div class="content">
-    <button-one></button-one>
-    <br/>
-    <button-two></button-two>
-    <br/>
-    <timer></timer>
+  <div class="container">
+      <timer #timer (currentTimerValueEmitter)="setCurrentTimerValue($event)"></timer>
+      <timer-view #timerView [timer]="timerValue"></timer-view>
+  </div>
+  <div class="container">
+      <button-one (click)="handleButtonOneClick()"></button-one>
+      <button-two (click)="handleButtonTwoClick()"></button-two>
   </div>
 </main>
 

@@ -6,12 +6,7 @@ import { Component } from "@angular/core";
     templateUrl: './button-two.component.html',
     styleUrl: './button-two.component.css'
   })
-  export class ButtonTwo {
+  export class ButtonTwoComponent {
     buttonText = 'Reset';
-
-    handleClick() {
-        console.log('Button clicked!');
-        // Your logic for handling the button click goes here
-    }
   }
   

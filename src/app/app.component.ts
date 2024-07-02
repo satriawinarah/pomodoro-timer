@@ -16,8 +16,14 @@ import { Timer } from './classes/timer';
 export class AppComponent {
   @ViewChild('timer') timer!:TimerComponent
   @ViewChild('timerView') timerView!:TimerViewComponent
+  @ViewChild('buttonOne') buttonOne!:ButtonOneComponent
+  @ViewChild('buttonTwo') buttonTwo!:ButtonTwoComponent
   title = 'pomodoro-timer';
   timerValue:Timer = new Timer(0,0,0)
+  timerVisibility = true
+  timerViewVisibility = false
+  buttonTwoVisibility = false
+  buttonOneText = 'Start'
 
   ngAfterViewInit() {
     // Now `timer` is initialized
@@ -33,20 +39,47 @@ export class AppComponent {
     this.timer.getCurrentTimerValue();
 
     if (this.timerView.isRunning) {
+      console.log("Pause")
+      this.buttonOneText = 'Resume'
       this.timerView.pauseCountdown();
     } else {
+      console.log("Start or Resume")
+      console.log("Current Timer Value:", this.timer.currentTimerValue)
+      this.timerVisibility = false
+      this.timerViewVisibility = true
+      this.buttonTwoVisibility = true
+      this.buttonOneText = 'Pause'
       if (this.timerView.intervalId) {
           clearInterval(this.timerView.intervalId);
       }
       this.timerView.startCountdown();
     }
-    
-    // Your logic for handling the button click goes here
   }
 
   handleButtonTwoClick() {
-    this.timer.getCurrentTimerValue();
+    this.timer.currentTimerValue = this.timer.previousTimerValue
     this.timerValue = new Timer(0, 0, 0)
     this.timerView.isRunning = false;
+
+    this.timerViewVisibility = false
+    this.timerVisibility = true
+    this.buttonTwoVisibility = false
+    this.buttonOneText = 'Start'
+  }
+
+  handleFinishedTimer(event :Boolean) {
+    console.log('Handle finished timer called!')
+    this.playAudio()
+    this.buttonTwoVisibility = false
+    this.buttonOneText = 'Start'
+    this.timerViewVisibility = false
+    this.timerVisibility = true
+  }
+
+  playAudio() {
+    let audio = new Audio();
+    audio.src = "../assets/alarm-clock-short.mp3";
+    audio.load();
+    audio.play();
   }
 }

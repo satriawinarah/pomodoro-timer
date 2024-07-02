@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Timer } from "../../classes/timer";
 
 @Component({
@@ -11,6 +11,7 @@ export class TimerViewComponent {
     @Input() timer: Timer = new Timer(10,0,0);
     intervalId: any;
     isRunning: boolean = false;
+    @Output() timerFinishedEvent = new EventEmitter<Boolean>();
 
     ngOnInit() {
         
@@ -29,6 +30,8 @@ export class TimerViewComponent {
                 this.timer.tick();
 
                 if (this.timer.isFinished()) {
+                    console.log('Timer Finished!')
+                    this.timerFinishedEvent.emit(true);
                     this.clearInterval();
                 }
             }

@@ -7,6 +7,6 @@ import { Component } from "@angular/core";
     styleUrl: './button-two.component.css'
   })
   export class ButtonTwoComponent {
-    buttonText = 'Reset';
+    buttonText = 'Stop';
   }
   

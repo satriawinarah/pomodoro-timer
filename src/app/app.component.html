@@ -9,12 +9,12 @@
 
 <main class="main">
   <div class="container">
-      <timer #timer (currentTimerValueEmitter)="setCurrentTimerValue($event)"></timer>
-      <timer-view #timerView [timer]="timerValue"></timer-view>
+      <timer #timer (currentTimerValueEmitter)="setCurrentTimerValue($event)" [hidden]="!timerVisibility"></timer>
+      <timer-view #timerView [timer]="timerValue" [hidden]="!timerViewVisibility" (timerFinishedEvent)="handleFinishedTimer($event)"></timer-view>
   </div>
   <div class="container">
-      <button-one (click)="handleButtonOneClick()"></button-one>
-      <button-two (click)="handleButtonTwoClick()"></button-two>
+      <button-one (click)="handleButtonOneClick()" [buttonText]="buttonOneText"></button-one>
+      <button-two (click)="handleButtonTwoClick()" [hidden]="!buttonTwoVisibility"></button-two>
   </div>
 </main>
 

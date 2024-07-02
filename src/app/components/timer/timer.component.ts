@@ -9,6 +9,7 @@ import { Timer } from "../../classes/timer";
 })
 export class TimerComponent {
     currentTimerValue:Timer = new Timer(0,0,0);
+    previousTimerValue:Timer = new Timer(0,0,0);
     @Output() currentTimerValueEmitter = new EventEmitter<Timer>();
 
     getCurrentTimerValue(){
@@ -18,18 +19,21 @@ export class TimerComponent {
     onTypedHour(event: any) {
         event.target.value = this.truncateInputValue(event.target.value);
         this.currentTimerValue.hours = event.target.value
+        this.previousTimerValue.hours = event.target.value
     }
 
     onTypedMinute(event: any) {
         event.target.value = this.validateInputValue(event.target.value);
         event.target.value = this.truncateInputValue(event.target.value);
         this.currentTimerValue.minutes = event.target.value
+        this.previousTimerValue.minutes = event.target.value
     }
 
     onTypedSecond(event: any) {
         event.target.value = this.validateInputValue(event.target.value);
         event.target.value = this.truncateInputValue(event.target.value);
         this.currentTimerValue.seconds = event.target.value
+        this.previousTimerValue.seconds = event.target.value
     }
 
     private truncateInputValue(inputValue: any): string {

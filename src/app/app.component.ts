@@ -78,7 +78,7 @@ export class AppComponent {
 
   playAudio() {
     let audio = new Audio();
-    audio.src = "../assets/alarm-clock-short.mp3";
+    audio.src = "assets/alarm-clock-short.mp3";
     audio.load();
     audio.play();
   }

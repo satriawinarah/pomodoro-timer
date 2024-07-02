@@ -8,7 +8,7 @@ import { Component, Input } from "@angular/core";
 })
 // ButtonOne for handling start and pause timer
 export class ButtonOneComponent {
-    @Input('buttonText') buttonText = 'Start';
+    @Input() buttonText = 'Start';
 
     setButtonText(text: string){
         this.buttonText = text;
